@@ -13,11 +13,12 @@ class MyGameMenu {
         </div>
         <br>
         <div class="game-menu-field-item game-menu-field-item-settings">
-            设置
+            退出
         </div>
     </div>
 </div>
 `);
+        this.$menu.hide();
         this.root.$my_game.append(this.$menu);
         this.$single_mode = this.$menu.find(".game-menu-field-item-single-mode");
         this.$multi_mode = this.$menu.find(".game-menu-field-item-multi-mode");
@@ -32,15 +33,14 @@ class MyGameMenu {
 
     add_listening_events() {
         let outer = this;
-        this.$single_mode.click(function(){
+        this.$single_mode.click(function () {
             outer.hide();
             outer.root.playground.show();
         });
-        this.$multi_mode.click(function(){
-            console.log("click multi");
+        this.$multi_mode.click(function () {
         });
-        this.$settings.click(function(){
-            console.log("click settings");
+        this.$settings.click(function () {
+            outer.root.settings.logout_on_remote();
         });
     }
 
