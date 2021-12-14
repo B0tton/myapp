@@ -24,7 +24,6 @@ class Player extends GameObject {
         if (this.is_me) {
             this.img = new Image();
             this.img.src = this.playground.root.settings.photo;
-            console.log(this.playground.root.settings.photo)
         }
     }
 
