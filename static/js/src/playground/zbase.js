@@ -37,11 +37,14 @@ class GamePlayground {
         let outer = this;
         this.$playground.show();
 
-        this.resize();
-
         this.width = this.$playground.width();
         this.height = this.$playground.height();
         this.game_map = new GameMap(this);
+
+        this.mode = mode;
+        this.state = "wating";   // wating -> fighting -> over
+        this.notice_board = new NoticeBoard(this);
+        this.player_count = 0;
 
         this.resize();
 
