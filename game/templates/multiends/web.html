@@ -4,13 +4,14 @@
     <link rel="stylesheet" href="https://cdn.acwing.com/static/jquery-ui-dist/jquery-ui.min.css">
     <script src="https://cdn.acwing.com/static/jquery/js/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="{% static 'css/game.css' %}">
+    <link rel="icon" href="https://q1.qlogo.cn/g?b=qq&nk=1023973501&s=100">
 </head>
 
 <body style="margin: 0">
     <div id="my_game"></div>
     <script type="module">
-        import {Mygame} from "{% static 'js/dist/game.js' %}";
-        $(document).ready(function(){
+        import { Mygame } from "{% static 'js/dist/game.js' %}";
+        $(document).ready(function () {
             let my_game = new Mygame("my_game");
         });
     </script>

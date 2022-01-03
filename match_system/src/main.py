@@ -72,7 +72,6 @@ class Pool:
     def increase_waiting_time(self):
         for player in self.players:
             player.waiting_time += 1
-            print(player.score, player.waiting_time)
 
     def match(self):
         while len(self.players) >= 3:

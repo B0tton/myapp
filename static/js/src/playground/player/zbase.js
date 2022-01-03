@@ -30,7 +30,7 @@ class Player extends GameObject {
         }
 
         if (this.character === "me") {
-            this.fireball_coldtime = 3;   // 单位：秒
+            this.fireball_coldtime = 0.1;   // 单位：秒
             this.fireball_img = new Image();
             this.fireball_img.src = "https://cdn.acwing.com/media/article/image/2021/12/02/1_9340c86053-fireball.png";
 
@@ -147,7 +147,7 @@ class Player extends GameObject {
         let fireball = new FireBall(this.playground, this, x, y, radius, vx, vy, color, speed, move_length, 0.01);
         this.fireballs.push(fireball);
 
-        this.fireball_coldtime = 3;
+        this.fireball_coldtime = 0.1;
 
         return fireball;
     }
@@ -202,6 +202,7 @@ class Player extends GameObject {
             this.destroy();
             return false;
         }
+
         this.damage_x = Math.cos(angle);
         this.damage_y = Math.sin(angle);
         this.damage_speed = damage * 100;
@@ -218,6 +219,8 @@ class Player extends GameObject {
     update() {
         this.spend_time += this.timedelta / 1000;
 
+        this.update_win();
+
         if (this.character === "me" && this.playground.state === "fighting") {
             this.update_coldtime();
         }
@@ -227,6 +230,13 @@ class Player extends GameObject {
         this.update_move();
 
         this.render();
+    }
+
+    update_win() {
+        if (this.playground.state === "fighting" && this.character === "me" && this.playground.players.length === 1) {
+            this.playground.state = "over";
+            this.playground.score_board.win();
+        }
     }
 
     update_coldtime() {
@@ -334,7 +344,10 @@ class Player extends GameObject {
 
     on_destroy() {
         if (this.character === "me") {
-            this.playground.state = "over";
+            if (this.playground.state === "fighting") {
+                this.playground.state = "over";
+                this.playground.score_board.lose();
+            }
         }
         for (let i = 0; i < this.playground.players.length; i++) {
             if (this.playground.players[i] === this) {
